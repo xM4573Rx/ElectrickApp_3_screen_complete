@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">electrickapp_fb</string>
+    <string name="screen_name">Ajustes</string>
+
+    <string-array name="tipe">
+        <item>kWh</item>
+        <item>$</item>
+    </string-array>
+</resources>

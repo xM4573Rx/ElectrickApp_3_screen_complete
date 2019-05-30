@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "118715996486",
+    "firebase_url": "https://fbea-61287.firebaseio.com",
+    "project_id": "fbea-61287",
+    "storage_bucket": "fbea-61287.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118715996486:android:adc276182ecbe4b0",
+        "android_client_info": {
+          "package_name": "com.firebase.electrickapp_fb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118715996486-fv5g1mnesc3c4ieau62kcdf6u6esmbnf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.firebase.electrickapp_fb",
+            "certificate_hash": "f8a5112eb2091339d9dd4ebc87f117f5291b6cd1"
+          }
+        },
+        {
+          "client_id": "118715996486-fc7hv16cuj8itabq804fceuc52ko5ah2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAafV7Q_UG0meZd8rlidiin0YGNkrcdl9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118715996486-fc7hv16cuj8itabq804fceuc52ko5ah2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
