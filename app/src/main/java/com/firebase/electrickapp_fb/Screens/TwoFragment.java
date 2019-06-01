@@ -42,9 +42,6 @@ public class TwoFragment extends Fragment {
         barEntries.add(new BarEntry(2,8f));
         barEntries.add(new BarEntry(3,19));
         barEntries.add(new BarEntry(4,4f));
-        //barEntries.add(new BarEntry(5,15f));
-        ///barEntries.add(new BarEntry(6,3f));
-        //barEntries.add(new BarEntry(7,9f));
 
         String[] months = new String[] {" ", "Enero", "Febrero", "Marzo", "Abril"};
 
@@ -53,30 +50,23 @@ public class TwoFragment extends Fragment {
 
         BarData data = new BarData(barDataSet);
         data.setBarWidth(0.9f); // set custom bar width
-        barChart.getXAxis().setDrawGridLines(false);
-        barChart.setData(data);
-        /*
-
-        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(months));
-        barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-
-        //barChart.setFitBars(true); // make the x-axis fit exactly all bars
-         // refresh*/
-
-        barChart.setFitBars(false);
-        barChart.setTouchEnabled(false);
-        barChart.getXAxis().setDrawAxisLine(false);
-
-        barChart.getAxisRight().setEnabled(false);
-        barChart.invalidate();
 
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(months));
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         barChart.getXAxis().setGranularityEnabled(true);
         barChart.getXAxis().setGranularity(1f);
         barChart.getXAxis().setLabelCount(4);
-        barChart.getXAxis().mDecimals = 0;
         barChart.getXAxis().setCenterAxisLabels(false);
+        barChart.getXAxis().setDrawAxisLine(false);
+        barChart.getXAxis().setDrawGridLines(false);
+        barChart.getAxisRight().setEnabled(false);
+
+        barChart.setFitBars(false);
+        barChart.setTouchEnabled(false);
+        barChart.setData(data);
+        barChart.invalidate();
+
+
 
         return PageTwo;
     }
