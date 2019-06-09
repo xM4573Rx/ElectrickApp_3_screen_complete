@@ -9,85 +9,9 @@
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barchart"
-        android:layout_below="@+id/radio_group_2"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="115dp">
     </com.github.mikephil.charting.charts.BarChart>
-
-    <RadioGroup
-        android:id="@+id/radio_group_1"
-        android:layout_width="396dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_view_13"
-        android:layout_marginTop="2dp"
-        android:orientation="horizontal" >
-
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="$"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="kWh"
-            android:textSize="18sp" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/radio_group_2"
-        android:layout_width="386dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_view_14"
-        android:layout_marginTop="2dp"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Dias"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Semanas"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/radioButton5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Meses"
-            android:textSize="18sp" />
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/txt_view_13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="115dp"
-        android:text="Seleccione el consumo:"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/txt_view_14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/radio_group_1"
-        android:layout_marginTop="30dp"
-        android:text="Seleccone el intervalo de tiempo:"
-        android:textSize="18sp" />
 
 </RelativeLayout>
