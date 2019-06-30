@@ -3,14 +3,14 @@
     <item>
         <shape>
             <gradient android:startColor="@android:color/white"
-                android:centerX="33%"
+                android:centerX="40%"
                 android:centerColor="#00FFFFFF" />
         </shape>
     </item>
     <item>
         <shape>
             <gradient android:centerColor="#00FFFFFF"
-                android:centerX="66%"
+                android:centerX="60%"
                 android:endColor="@android:color/white" />
         </shape>
     </item>

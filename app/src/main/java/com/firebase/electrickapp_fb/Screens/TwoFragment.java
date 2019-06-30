@@ -13,6 +13,7 @@ import android.support.v7.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.electrickapp_fb.R;
@@ -45,12 +46,19 @@ public class TwoFragment extends Fragment {
     private ArrayList<Tiempos> mTiempoList = new ArrayList<>();
     private BarChart barChart;
 
+    private TextView rconsumo, lconsumo, rtiempo, ltiempo;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View PageTwo = inflater.inflate(R.layout.fragment_two, container, false);
 
         barChart = (BarChart) PageTwo.findViewById(R.id.barchart);
+
+        lconsumo = (TextView) PageTwo.findViewById(R.id.decremento_consumo);
+        rconsumo = (TextView) PageTwo.findViewById(R.id.incremento_consumo);
+        ltiempo = (TextView) PageTwo.findViewById(R.id.decremento_tiempo);
+        rtiempo = (TextView) PageTwo.findViewById(R.id.incremento_tiempo);
 
         barChart.getDescription().setEnabled(false);
 
@@ -115,7 +123,16 @@ public class TwoFragment extends Fragment {
                     int offset = (recyclerView_consumo.getWidth() / recyclerView_consumo.getWidth() - 1) / 2;
                     int position = ((LinearLayoutManager) mLayoutManager1).findFirstVisibleItemPosition() + offset;
 
-                    Toast.makeText(getContext(),"posicion = " + mConsumoList.get(recyclerView_consumo.getChildAdapterPosition(centerView)).getmConsumo1(), Toast.LENGTH_SHORT).show();
+                    if (mConsumoList.get(recyclerView_consumo.getChildAdapterPosition(centerView)).getmConsumo1().equals("$")){
+                        lconsumo.setVisibility(View.INVISIBLE);
+                        rconsumo.setVisibility(View.VISIBLE);
+                        Toast.makeText(getContext(),"Consumo en pesos", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (mConsumoList.get(recyclerView_consumo.getChildAdapterPosition(centerView)).getmConsumo1().equals("kWh")){
+                        lconsumo.setVisibility(View.VISIBLE);
+                        rconsumo.setVisibility(View.INVISIBLE);
+                        Toast.makeText(getContext(),"Consumo en kWh", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -132,7 +149,28 @@ public class TwoFragment extends Fragment {
                     int offset = (recyclerView_consumo.getWidth() / recyclerView_consumo.getWidth() - 1) / 2;
                     int position = ((LinearLayoutManager) mLayoutManager2).findFirstVisibleItemPosition() + offset;
 
-                    //Toast.makeText(getContext(),"posicion = " + mTiempoList.get(recyclerView_tiempo.getChildAdapterPosition(centerView)).getmTiempo1(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(),"posicion" + mTiempoList.get(recyclerView_tiempo.getChildAdapterPosition(centerView)).getmTiempo1(), Toast.LENGTH_SHORT).show();
+
+                    if (mTiempoList.get(recyclerView_tiempo.getChildAdapterPosition(centerView)).getmTiempo1() == 2131230844){
+                        ltiempo.setVisibility(View.INVISIBLE);
+                        rtiempo.setVisibility(View.VISIBLE);
+                        Toast.makeText(getContext(),"Vista diaria", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (mTiempoList.get(recyclerView_tiempo.getChildAdapterPosition(centerView)).getmTiempo1() == 2131230847){
+                        ltiempo.setVisibility(View.VISIBLE);
+                        rtiempo.setVisibility(View.VISIBLE);
+                        Toast.makeText(getContext(),"Vista semanal", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (mTiempoList.get(recyclerView_tiempo.getChildAdapterPosition(centerView)).getmTiempo1() == 2131230845){
+                        ltiempo.setVisibility(View.VISIBLE);
+                        rtiempo.setVisibility(View.VISIBLE);
+                        Toast.makeText(getContext(),"Vista quincenal", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (mTiempoList.get(recyclerView_tiempo.getChildAdapterPosition(centerView)).getmTiempo1() == 2131230846){
+                        ltiempo.setVisibility(View.VISIBLE);
+                        rtiempo.setVisibility(View.INVISIBLE);
+                        Toast.makeText(getContext(),"Vista mensual", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
