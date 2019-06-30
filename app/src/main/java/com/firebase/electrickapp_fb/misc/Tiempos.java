@@ -2,17 +2,17 @@ package com.firebase.electrickapp_fb.misc;
 
 public class Tiempos {
 
-    private String mTiempo1;
+    private int mTiempo1;
 
-    public Tiempos(String tiempo1) {
+    public Tiempos(int tiempo1) {
         mTiempo1 = tiempo1;
     }
 
-    public void changeTiempo1(String tiempo) {
+    public void changeTiempo1(int tiempo) {
         mTiempo1 = tiempo;
     }
 
-    public String getmTiempo1() {
+    public int getmTiempo1() {
         return mTiempo1;
     }
 }

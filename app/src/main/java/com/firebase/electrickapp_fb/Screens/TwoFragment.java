@@ -157,14 +157,13 @@ public class TwoFragment extends Fragment {
     }
 
     private void tiempoList() {
-        Tiempos empty = new Tiempos("");
-        Tiempos cons = new Tiempos("Dias");
-        Tiempos semanas = new Tiempos("Semanas");
-        Tiempos quincena = new Tiempos("Quincena");
-        Tiempos meses = new Tiempos(" ");
-        mTiempoList.add(cons);
+        Tiempos dias = new Tiempos(R.drawable.ic_calendar_1);
+        Tiempos semanas = new Tiempos(R.drawable.ic_calendar_7);
+        Tiempos quincenas = new Tiempos(R.drawable.ic_calendar_15);
+        Tiempos meses = new Tiempos(R.drawable.ic_calendar_30);
+        mTiempoList.add(dias);
         mTiempoList.add(semanas);
-        mTiempoList.add(quincena);
+        mTiempoList.add(quincenas);
         mTiempoList.add(meses);
         adapter_tiempo.notifyDataSetChanged();
     }

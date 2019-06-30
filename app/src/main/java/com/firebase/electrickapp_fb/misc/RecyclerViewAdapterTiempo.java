@@ -32,7 +32,7 @@ public class RecyclerViewAdapterTiempo extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(@NonNull TiempoViewHolder viewHolder, int i) {
         Tiempos currentItem = mTiempoList.get(i % mTiempoList.size());
-        viewHolder.txtview.setText(currentItem.getmTiempo1());
+        viewHolder.txtview.setCompoundDrawablesWithIntrinsicBounds(currentItem.getmTiempo1(),0,0,0);
     }
 
     public RecyclerViewAdapterTiempo(ArrayList<Tiempos> mTiempoList, Context context){
