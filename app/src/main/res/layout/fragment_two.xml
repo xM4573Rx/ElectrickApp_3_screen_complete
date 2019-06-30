@@ -1,17 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
-    android:padding="15dp">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barchart"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginTop="115dp">
+        android:layout_marginTop="140dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
     </com.github.mikephil.charting.charts.BarChart>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/decremento_consumo"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:background="@drawable/arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/consumo_list"
+        app:layout_constraintEnd_toStartOf="@+id/consumo_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/consumo_list" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/consumo_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="550dp"
+        android:orientation="horizontal"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toStartOf="@id/incremento_consumo"
+        app:layout_constraintStart_toEndOf="@id/decremento_consumo"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/consumo_item">
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/incremento_consumo"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:background="@drawable/arrow"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@+id/consumo_list"
+        app:layout_constraintEnd_toStartOf="@+id/decremento_tiempo"
+        app:layout_constraintStart_toEndOf="@+id/consumo_list"
+        app:layout_constraintTop_toTopOf="@+id/consumo_list" />
+
+    <TextView
+        android:id="@+id/decremento_tiempo"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:background="@drawable/arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/tiempo_list"
+        app:layout_constraintEnd_toStartOf="@+id/tiempo_list"
+        app:layout_constraintStart_toEndOf="@id/incremento_consumo"
+        app:layout_constraintTop_toTopOf="@+id/tiempo_list" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/tiempo_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="550dp"
+        android:orientation="horizontal"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toStartOf="@id/incremento_tiempo"
+        app:layout_constraintStart_toEndOf="@id/decremento_tiempo"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/consumo_item">
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/incremento_tiempo"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:background="@drawable/arrow"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@+id/tiempo_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tiempo_list"
+        app:layout_constraintTop_toTopOf="@+id/tiempo_list" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/consumo_list"
+        app:layout_constraintEnd_toEndOf="@+id/consumo_list"
+        app:layout_constraintStart_toStartOf="@+id/consumo_list"
+        app:layout_constraintTop_toTopOf="@+id/consumo_list"
+        app:srcCompat="@drawable/gradient" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tiempo_list"
+        app:layout_constraintEnd_toEndOf="@+id/tiempo_list"
+        app:layout_constraintStart_toStartOf="@+id/tiempo_list"
+        app:layout_constraintTop_toTopOf="@+id/tiempo_list"
+        app:srcCompat="@drawable/gradient" />
+
+</android.support.constraint.ConstraintLayout>

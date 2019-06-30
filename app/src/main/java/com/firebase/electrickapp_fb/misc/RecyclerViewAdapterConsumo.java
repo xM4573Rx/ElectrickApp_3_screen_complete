@@ -17,6 +17,8 @@ public class RecyclerViewAdapterConsumo extends RecyclerView.Adapter<RecyclerVie
     private ArrayList<Consumos> mConsumoList;
     private Context context;
 
+    private int selectedItem = -1;
+
     @NonNull
     @Override
     public ConsumoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -29,7 +31,7 @@ public class RecyclerViewAdapterConsumo extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public void onBindViewHolder(@NonNull ConsumoViewHolder viewHolder, int i) {
-        Consumos currentItem = mConsumoList.get(i);
+        Consumos currentItem = mConsumoList.get(i % mConsumoList.size());
         viewHolder.txtview.setText(currentItem.getmConsumo1());
     }
 
@@ -51,7 +53,6 @@ public class RecyclerViewAdapterConsumo extends RecyclerView.Adapter<RecyclerVie
             super(view);
 
             txtview = (TextView) view.findViewById(R.id.consumo_label);
-
         }
     }
 }
