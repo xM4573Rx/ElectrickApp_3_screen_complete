@@ -26,7 +26,10 @@ import com.firebase.electrickapp_fb.Screens.ThreeFragment;
 import com.firebase.electrickapp_fb.Screens.TwoFragment;
 import com.firebase.electrickapp_fb.settings.Ajustes;
 import com.firebase.electrickapp_fb.settings.Code;
+import com.firebase.electrickapp_fb.transfer.History;
 import com.firebase.electrickapp_fb.transfer.ProyData;
+import com.firebase.electrickapp_fb.transfer.Selector;
+import com.firebase.electrickapp_fb.transfer.Time;
 import com.firebase.electrickapp_fb.transfer.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -46,9 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String DATO_KEY_TEL = "TELEFONO";
     public static final String DATO_KEY_NAME = "NOMBRE";
+    public static final String DATO_KEY_SELE = "SELECTOR";
+    public static final String DATO_KEY_TIME = "TIME";
 
-    private String telefono;
-    private String nombre;
+    public String telefono;
+    public String nombre;
+    public String selector;
+    public String time;
 
     public String proyeccion;
     public String unidad;
@@ -60,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseReference mDataBaseReference = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mUid = mDataBaseReference.child("User");
+    DatabaseReference mSelectorChild = mDataBaseReference.child("User");
+    DatabaseReference mTimeChild = mDataBaseReference.child("User");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("ElectrickApp");
 
         String Archivos[] = fileList();
+
         if(ArchivoExiste(Archivos,"Datos.txt")){
             //Toast.makeText(MainActivity.this,"SI", Toast.LENGTH_SHORT).show();
         }else {
@@ -115,18 +125,60 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(this, "Archivo creado", Toast.LENGTH_SHORT).show();
         }
 
+        if(ArchivoExiste(Archivos,"Selector.txt")){
+            //Toast.makeText(MainActivity.this,"SI", Toast.LENGTH_SHORT).show();
+        }else {
+            //Toast.makeText(MainActivity.this,"NO", Toast.LENGTH_SHORT).show();
+            try {
+                OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput("Selector.txt", Activity.MODE_PRIVATE));
+
+                archivo.write("0");
+                archivo.flush();
+                archivo.close();
+
+            } catch (IOException e) {
+
+            }
+            //Toast.makeText(this, "Archivo creado", Toast.LENGTH_SHORT).show();
+        }
+
+        if(ArchivoExiste(Archivos,"Time.txt")){
+            //Toast.makeText(MainActivity.this,"SI", Toast.LENGTH_SHORT).show();
+        }else {
+            //Toast.makeText(MainActivity.this,"NO", Toast.LENGTH_SHORT).show();
+            try {
+                OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput("Time.txt", Activity.MODE_PRIVATE));
+
+                archivo.write("0");
+                archivo.flush();
+                archivo.close();
+
+            } catch (IOException e) {
+
+            }
+            //Toast.makeText(this, "Archivo creado", Toast.LENGTH_SHORT).show();
+        }
+
         String archivos [] = fileList();
 
-        if (ArchivoExiste(archivos, "Datos.txt") && ArchivoExiste(archivos, "User.txt")) {
+        if (ArchivoExiste(archivos, "Datos.txt") && ArchivoExiste(archivos, "User.txt") && ArchivoExiste(archivos, "Selector.txt") && ArchivoExiste(archivos, "Time.txt")) {
             try {
                 InputStreamReader archivo1 = new InputStreamReader(openFileInput("Datos.txt"));
                 InputStreamReader archivo2 = new InputStreamReader(openFileInput("User.txt"));
+                InputStreamReader archivo3 = new InputStreamReader(openFileInput("Selector.txt"));
+                InputStreamReader archivo4 = new InputStreamReader(openFileInput("Time.txt"));
                 BufferedReader br1 = new BufferedReader(archivo1);
                 BufferedReader br2 = new BufferedReader(archivo2);
+                BufferedReader br3 = new BufferedReader(archivo3);
+                BufferedReader br4 = new BufferedReader(archivo4);
                 String linea1 = br1.readLine();
                 String linea2 = br2.readLine();
+                String linea3 = br3.readLine();
+                String linea4 = br4.readLine();
                 String AllData1 = "";
                 String AllData2 = "";
+                String AllData3 = "";
+                String AllData4 = "";
 
                 while(linea1 != null) {
                     AllData1 = AllData1 + linea1;// + "\r\n";
@@ -138,13 +190,29 @@ public class MainActivity extends AppCompatActivity {
                     linea2 = br2.readLine();
                 }
 
+                while(linea3 != null) {
+                    AllData3 = AllData3 + linea3;// + "\r\n";
+                    linea3 = br3.readLine();
+                }
+
+                while(linea4 != null) {
+                    AllData4 = AllData4 + linea4;// + "\r\n";
+                    linea4 = br4.readLine();
+                }
+
                 br1.close();
                 br2.close();
+                br3.close();
+                br4.close();
                 archivo1.close();
                 archivo2.close();
+                archivo3.close();
+                archivo4.close();
 
                 telefono = AllData2.substring(0, AllData2.indexOf("%"));
                 nombre = AllData2.substring(AllData2.indexOf("%") + 1, AllData2.indexOf("&"));
+                selector = AllData3;
+                time = AllData4;
 
                 SharedPreferences preferencias = getSharedPreferences("dato", Context.MODE_PRIVATE);
                 SharedPreferences.Editor Obj_editor = preferencias.edit();
@@ -161,6 +229,16 @@ public class MainActivity extends AppCompatActivity {
                 Obj_editor2.putString("DATO2", AllData1);
                 Obj_editor2.apply();
 
+                SharedPreferences preferencias3 = getSharedPreferences("dato3", Context.MODE_PRIVATE);
+                SharedPreferences.Editor Obj_editor3 = preferencias3.edit();
+                Obj_editor3.putString("DATO3", AllData3);
+                Obj_editor3.apply();
+
+                SharedPreferences preferencias4 = getSharedPreferences("dato4", Context.MODE_PRIVATE);
+                SharedPreferences.Editor Obj_editor4 = preferencias4.edit();
+                Obj_editor4.putString("DATO4", AllData4);
+                Obj_editor4.apply();
+
                 //Toast.makeText(MainActivity.this,"MODULO " + telefono, Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
 
@@ -176,6 +254,12 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences2 = getSharedPreferences("dato2", Context.MODE_PRIVATE);
         String All = preferences2.getString("DATO2", "0");
 
+        SharedPreferences preferences3 = getSharedPreferences("dato3", Context.MODE_PRIVATE);
+        String selec = preferences3.getString("DATO3", "0");
+
+        SharedPreferences preferences4 = getSharedPreferences("dato4", Context.MODE_PRIVATE);
+        String tim = preferences4.getString("DATO4", "0");
+
         User u = new User();
         u.setUid(number);
         u.setNombre(name);
@@ -183,6 +267,30 @@ public class MainActivity extends AppCompatActivity {
         u.setWatt("0");
         u.setWattHora("0");
         mDataBaseReference.child("User").child(u.getUid()).setValue(u);
+
+        History h = new History();
+        h.setHistorico("1#2$3%4&");
+        mUid.child(u.getUid()).child("Historico").child("Días").setValue(h);
+
+        History hi = new History();
+        hi.setHistorico("5#6$7%8&");
+        mUid.child(u.getUid()).child("Historico").child("Semanas").setValue(hi);
+
+        History his = new History();
+        his.setHistorico("9#10$11%12&");
+        mUid.child(u.getUid()).child("Historico").child("Quincenas").setValue(his);
+
+        History hist = new History();
+        hist.setHistorico("13#14$15%16&");
+        mUid.child(u.getUid()).child("Historico").child("Meses").setValue(hist);
+
+        Time t = new Time();
+        t.setTiempo(tim);
+        mUid.child(u.getUid()).child("Historico").child("Graph").child("Tiempo").setValue(t);
+
+        Selector s = new Selector();
+        s.setModo(selec);
+        mUid.child(u.getUid()).child("Historico").child("Graph").child("Selector").setValue(s);
 
         SetUpViewPager(MyPage);
         MyTabs.setupWithViewPager(MyPage);
@@ -229,8 +337,14 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences1 = getSharedPreferences("dato1", Context.MODE_PRIVATE);
         String name = preferences1.getString("DATO1", "0");
 
-        Adapter.AddFragmentPage(newInstance2(number, name)); /*new OneFragment());*/
-        Adapter.AddFragmentPage(new TwoFragment());
+        SharedPreferences preferences3 = getSharedPreferences("dato3", Context.MODE_PRIVATE);
+        String selector = preferences3.getString("DATO3", "0");
+
+        SharedPreferences preferences4 = getSharedPreferences("dato4", Context.MODE_PRIVATE);
+        String time = preferences4.getString("DATO4", "0");
+
+        Adapter.AddFragmentPage(newInstance1(number, name)); /*new OneFragment());*/
+        Adapter.AddFragmentPage(newInstance2(number, selector, time));
         Adapter.AddFragmentPage(new ThreeFragment());
         //We Need Fragment class now
         viewpage.setAdapter(Adapter);
@@ -259,14 +373,72 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        SharedPreferences preferences = getSharedPreferences("dato", Context.MODE_PRIVATE);
+        String number = preferences.getString("DATO", "0");
+
+        mSelectorChild.child(number).child("Historico").child("Graph").child("Selector").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String se = dataSnapshot.child("modo").getValue().toString();
+
+                try {
+                    OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput("Selector.txt", Activity.MODE_PRIVATE));
+
+                    archivo.write(se);
+                    archivo.flush();
+                    archivo.close();
+                } catch (IOException e) {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        mTimeChild.child(number).child("Historico").child("Graph").child("Tiempo").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String ti = dataSnapshot.child("tiempo").getValue().toString();
+
+                try {
+                    OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput("Time.txt", Activity.MODE_PRIVATE));
+
+                    archivo.write(ti);
+                    archivo.flush();
+                    archivo.close();
+                } catch (IOException e) {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
-    private OneFragment newInstance2(String transfer, String transfer1) {
+    private OneFragment newInstance1(String transfer, String transfer1) {
 
         Bundle bundle = new Bundle();
         bundle.putString(DATO_KEY_TEL, transfer);
         bundle.putString(DATO_KEY_NAME, transfer1);
         OneFragment fragment = new OneFragment();
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+
+    private TwoFragment newInstance2(String transfer, String transfer1, String transfer2) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString(DATO_KEY_TEL, transfer);
+        bundle.putString(DATO_KEY_SELE, transfer1);
+        bundle.putString(DATO_KEY_TIME, transfer2);
+        TwoFragment fragment = new TwoFragment();
         fragment.setArguments(bundle);
 
         return fragment;
