@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
 
         History h = new History();
         h.setHistorico("1#2$3%4&");
-        mUid.child(u.getUid()).child("Historico").child("Días").setValue(h);
+        mUid.child(u.getUid()).child("Historico").child("Dias").setValue(h);
 
         History hi = new History();
         hi.setHistorico("5#6$7%8&");

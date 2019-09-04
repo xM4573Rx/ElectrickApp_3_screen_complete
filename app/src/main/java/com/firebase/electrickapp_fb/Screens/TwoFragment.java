@@ -330,7 +330,7 @@ public class TwoFragment extends Fragment {
     }
 
     private void Dias_pesos(String telefono) {
-        mDiasChild.child(telefono).child("Historico").child("Días").addValueEventListener(new ValueEventListener() {
+        mDiasChild.child(telefono).child("Historico").child("Dias").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dias = (String) dataSnapshot.child("historico").getValue();
@@ -522,7 +522,7 @@ public class TwoFragment extends Fragment {
     }
 
     private void Dias_kwh(String telefono) {
-        mDiasChild.child(telefono).child("Historico").child("Días").addValueEventListener(new ValueEventListener() {
+        mDiasChild.child(telefono).child("Historico").child("Dias").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dias = (String) dataSnapshot.child("historico").getValue();
